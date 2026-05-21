@@ -266,11 +266,9 @@ def strip_excluded_media(html: str) -> str:
     return out
 
 
-def gutenberg_to_html(content: str, *, text_only: bool = False) -> str:
-    if not content:
-        return ""
-    html = re.sub(r"<!-- /wp:[^>]+ -->", "", content)
-    html = re.sub(r"<!-- wp:[^>]+ -->", "", html)
+def cleanup_content_html(html: str) -> str:
+    """Remove editor artifacts that break layout in the browser."""
+    html = re.sub(r"<!--\s*/?wp:[\s\S]*?-->", "", html)
     html = re.sub(r'<p class="wp-block-pdfemb[^"]*"></p>', "", html)
     html = re.sub(
         r'<figure class="wp-block-image"><img alt=""\s*/?></figure>',
@@ -278,6 +276,22 @@ def gutenberg_to_html(content: str, *, text_only: bool = False) -> str:
         html,
         flags=re.I,
     )
+    html = re.sub(
+        r'<figure class="wp-block-gallery[^"]*">\s*</figure>',
+        "",
+        html,
+        flags=re.I,
+    )
+    html = re.sub(r"<p>\s*</p>", "", html, flags=re.I)
+    html = re.sub(r"\n?-->\s*$", "", html)
+    return html.strip()
+
+
+def gutenberg_to_html(content: str, *, text_only: bool = False) -> str:
+    """Preserve WordPress block HTML; only strip editor comments."""
+    if not content:
+        return ""
+    html = cleanup_content_html(content)
 
     if text_only:
         parts: list[str] = []
@@ -294,19 +308,7 @@ def gutenberg_to_html(content: str, *, text_only: bool = False) -> str:
                 parts.append(f"<h4>{m.group(3)}</h4>")
         return PRESENTAZIONE_PLACEHOLDER + "\n" + "\n".join(parts)
 
-    def gallery_repl(m: re.Match) -> str:
-        imgs = re.findall(r"<img[^>]+>", m.group(1), re.I)
-        return "\n".join(f'<figure class="wp-block-image">{img}</figure>' for img in imgs)
-
-    html = re.sub(
-        r'<ul class="blocks-gallery-grid">([\s\S]*?)</ul>',
-        gallery_repl,
-        html,
-        flags=re.I,
-    )
-    html = re.sub(r'<div class="wp-block-column"[^>]*>\s*</div>', "", html, flags=re.I)
-    html = re.sub(r"<p>\s*</p>", "", html, flags=re.I)
-    return html.strip()
+    return html
 
 
 def find_post(posts: dict, cfg: dict):

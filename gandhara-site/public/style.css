@@ -196,6 +196,33 @@ article h3 a:hover{
 	 height: 50vh;
 }
 
+/* Contenuto articoli: stessi blocchi Gutenberg del sito WordPress */
+.single-gallery .wp-block-image img,
+.single-gallery .blocks-gallery-item img,
+.single-gallery .wp-block-gallery img,
+.single-gallery .wp-block-video video {
+  max-width: 100%;
+  height: auto;
+}
+
+.single-gallery .wp-block-gallery {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Gallerie Gutenberg annidate: griglia come sul sito WordPress */
+.single-gallery figure.wp-block-gallery.has-nested-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--style--unstable-gallery-gap, 16px);
+  margin: 0;
+  padding: 0;
+}
+
+.single-gallery .wp-block-gallery.has-nested-images figure.wp-block-image {
+  float: none;
+}
+
 .meta-data h3{
 	margin-top: 0;
 	margin-bottom: 0;
