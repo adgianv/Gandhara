@@ -1,0 +1,30 @@
+# Large media files
+*.mov
+*.key
+*.mp4
+*.avi
+
+# macOS
+.DS_Store
+
+# Build output
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Large media files (safety net)
+*.mov
+*.mp4
+*.avi
+*.mkv
+*.key
+*.zip
+*.tar.gz
+*.dmg
+
+# Env files
+.env
+.env.local
+.env.*.local

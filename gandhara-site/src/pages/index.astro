@@ -1,0 +1,209 @@
+---
+import Layout from '../layouts/Layout.astro';
+import mostre from '../data/mostre.json';
+import cataloghi from '../data/cataloghi.json';
+import collab from '../data/collab.json';
+import pharmakon from '../data/pharmakon.json';
+import stampa from '../data/stampa.json';
+import about from '../data/about.json';
+---
+<Layout title="Gandhara">
+
+  <div class="main-home container-fluid">
+
+    <div id="wo">
+      <img src="/uploads/2022/09/IG_1080x1920_nologhi.jpg" class="img-fluid" alt="">
+    </div>
+
+    <div class="scrolling-text">
+      <p1>GAN</p1>
+      <p2>DHA</p2>
+      <p3>RA</p3>
+    </div>
+
+  </div>
+
+  <div id="body-home">
+    <div id="body-box">
+
+      <!-- MOSTRE -->
+      <div id="mostre"></div>
+      <article class="article-home">
+        <div class="title container-fluid">
+          <h2>Mostre</h2>
+        </div>
+        {mostre.map(item => (
+          <div class="meta-data">
+            <h3>
+              <div class="container-fluid">
+                <span class="animated-info">
+                  <a href={`/mostre/${item.slug}`}>{item.title}</a>
+                </span>
+              </div>
+            </h3>
+          </div>
+        ))}
+      </article>
+
+      <!-- CATALOGHI -->
+      <div id="cataloghi"></div>
+      <article class="article-home-2">
+        <div class="title container-fluid">
+          <h2>Cataloghi</h2>
+        </div>
+        {cataloghi.map(item => (
+          <div class="meta-data">
+            <h3>
+              <div class="container-fluid">
+                <span class="animated-info">
+                  <a href={`/cataloghi/${item.slug}`}>{item.title}</a>
+                </span>
+              </div>
+            </h3>
+          </div>
+        ))}
+      </article>
+
+      <!-- COLLAB -->
+      <div id="collab"></div>
+      <article class="article-home-3">
+        <div class="title container-fluid">
+          <h2>Collab</h2>
+        </div>
+        {collab.map(item => (
+          <div class="meta-data">
+            <h3>
+              <div class="container-fluid">
+                <span class="animated-info">
+                  <a href={`/collab/${item.slug}`}>{item.title}</a>
+                </span>
+              </div>
+            </h3>
+          </div>
+        ))}
+      </article>
+
+      <!-- PHARMAKON -->
+      <div id="pharmakon"></div>
+      <article class="article-home-2">
+        <div class="title container-fluid">
+          <h2>Pharmakon</h2>
+        </div>
+        {pharmakon.map(item => (
+          <div class="meta-data">
+            <h3>
+              <div class="container-fluid">
+                <span class="animated-info">
+                  <a href={`/pharmakon/${item.slug}`}>{item.title}</a>
+                </span>
+              </div>
+            </h3>
+          </div>
+        ))}
+      </article>
+
+      <!-- STAMPA -->
+      <div id="stampa"></div>
+      <article class="article-home-2">
+        <div class="title container-fluid">
+          <h2>Stampa</h2>
+        </div>
+        {stampa.map(item => (
+          <div class="meta-data">
+            <h3>
+              <div class="container-fluid">
+                <span class="animated-info">
+                  <a href={`/stampa/${item.slug}`}>{item.title}</a>
+                </span>
+              </div>
+            </h3>
+          </div>
+        ))}
+      </article>
+
+      <!-- ABOUT -->
+      <div id="about"></div>
+      <article class="article-home-4">
+        <div id="logo-turn">
+          <div class="face"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="container-fluid">
+              <Fragment set:html={about.content} />
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- Flag animation for logo -->
+  <script>
+    function _defineProperty(obj, key, value) {
+      if (key in obj) { Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true }); }
+      else { obj[key] = value; }
+      return obj;
+    }
+
+    const STRIP_WIDTH = 1;
+
+    class Flag {
+      constructor(f) {
+        this.image = f;
+        this.DOMElement = document.createElement("div");
+        this.parts = [];
+        this.shadows = [];
+        this.t = 0;
+        if (this.image.clientWidth > 0) { this.onload(); }
+        else { this.image.addEventListener("load", this.onload.bind(this), false); }
+      }
+      onload() {
+        this.DOMElement.style.width = `${this.image.clientWidth}px`;
+        this.DOMElement.style.height = `${this.image.clientHeight}px`;
+        for (var x = 0; x < this.image.clientWidth; x += STRIP_WIDTH) {
+          var p = document.createElement("div"), s = document.createElement("div");
+          this.parts.push(p); this.shadows.push(s);
+          p.style.backgroundImage = `url(${this.image.src})`;
+          s.style.left = p.style.left = `${x}px`;
+          s.style.width = p.style.width = `${STRIP_WIDTH}px`;
+          p.style.backgroundPosition = `${-x}px 0`;
+          this.DOMElement.appendChild(p); this.DOMElement.appendChild(s);
+        }
+        this.image.parentElement.replaceChild(this.DOMElement, this.image);
+        this.DOMElement.className = this.image.className;
+        this.DOMElement.id = this.image.id;
+      }
+      update(dt) { this.t += dt; }
+      render() {
+        this.parts.forEach(function(p, x) {
+          let s = this.shadows[x],
+            a = (x * Flag.SCALE_I + this.t * Flag.SCALE_T) * Flag.SCALE_A,
+            v1 = Math.sin(a), v2 = Math.sin(a - Flag.OFFSET_S);
+          s.style.top = p.style.top = `${v1 * 10}px`;
+          s.style.opacity = (v2 + 1) / 4;
+        }.bind(this));
+      }
+    }
+    _defineProperty(Flag, "SCALE_I", 1);
+    _defineProperty(Flag, "SCALE_T", 100 / STRIP_WIDTH);
+    _defineProperty(Flag, "SCALE_A", 0.02 * STRIP_WIDTH);
+    _defineProperty(Flag, "OFFSET_S", 1.5 * STRIP_WIDTH);
+
+    let flags = Array.prototype.map.call(document.querySelectorAll(".flag"), f => new Flag(f));
+
+    let lt = null, dt = 0, st = 1000/60, mt = st*3, ft = st/1000;
+    function loop(t) {
+      requestAnimationFrame(loop);
+      if (lt != null) {
+        dt += t - lt;
+        while (dt >= st) { if (dt < mt) { flags.forEach(f => f.update(ft)); } dt -= st; }
+        flags.forEach(f => f.render());
+      }
+      lt = t;
+    }
+    requestAnimationFrame(loop);
+  </script>
+
+</Layout>

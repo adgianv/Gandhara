@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import items from '../../data/collab.json';
+
+export function getStaticPaths() {
+  return items.map(item => ({
+    params: { slug: item.slug },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+---
+<Layout title={`${item.title} — Gandhara`}>
+
+  {item.coverImage && (
+    <div class="img-post">
+      <img src={item.coverImage} alt={item.title}>
+    </div>
+  )}
+
+  <div class="container-fluid">
+    <article>
+      <div class="row">
+        <div class="single-title col-sm-6">
+          <h3>{item.title}</h3>
+        </div>
+        <div class="single-gallery col-sm-6">
+          <Fragment set:html={item.content} />
+        </div>
+      </div>
+    </article>
+  </div>
+
+</Layout>

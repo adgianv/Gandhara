@@ -1,0 +1,478 @@
+/*
+Theme Name: Gandhara
+Theme URI: https://gandhara.info
+Author: Enrico Cattelan
+Author URI: https://enricocattelan.com
+Theme domain: gandhara
+*/
+
+* {
+margin:0;
+padding:0;
+box-sizing:border-box;
+-webkit-font-smoothing:antialiased;
+-moz-font-smoothing:antialiased;
+-ms-font-smoothing:antialiased;
+text-rendering:optimizeLegibility;
+}
+
+@font-face {
+	font-family: 'Neue Haas Grotesk';
+  src: url("/fonts/NeueHaasDisplayRoman.ttf") format("truetype"),
+       url("/fonts/NeueHaasDisplayMediu.ttf") format("truetype"),
+       url("/fonts/NeueHaasDisplayBold.ttf") format("truetype");
+	}
+
+	@font-face {
+  font-family: 'FONT NAME';
+  src: url("/fonts/MAZIUSREVIEW20.09-Italic.woff2") format("woff2");
+}
+
+html,body{
+  font-family:'Neue Haas Grotesk', sans-serif !important;
+  width:100%;
+  height:100%;
+  margin:0;
+  border:0;
+  cursor: none;
+	isolation: isolate;
+}
+
+body{
+	overflow-x: hidden;
+}
+
+body a{
+	color: black;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+body .cursor {
+  pointer-events: none;
+}
+body .cursor__ball {
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-mix-blend-mode:difference;
+	-moz-mix-blend-mode:difference;
+	-ms-mix-blend-mode:difference;
+	-o-mix-blend-mode:difference;
+	mix-blend-mode:difference;
+  z-index: 10;
+}
+body .cursor__ball circle {
+  fill: lightgrey;
+	border: 1px solid red;
+}
+
+#body-home{
+	width: 100%;
+	height: auto;
+	background-color: #fff !important;
+}
+
+#body-box{
+	background: #fff !important;
+	-webkit-mix-blend-mode:luminosity;
+	-moz-mix-blend-mode:luminosity;
+	-ms-mix-blend-mode:luminosity;
+	-o-mix-blend-mode:luminosity;
+	mix-blend-mode:luminosity;
+}
+
+#mix{
+	-webkit-mix-blend-mode:difference;
+	-moz-mix-blend-mode:difference;
+	-ms-mix-blend-mode:difference;
+	-o-mix-blend-mode:difference;
+	mix-blend-mode:difference;
+	/*background-color: #fff;*/
+	position: fixed;
+	width: 100%;
+	height: 4rem;
+	top: 0;
+	z-index: 2;
+}
+
+header{
+  width: 100%;
+  height: 4rem;
+  line-height: 4rem;
+  border-bottom: 1px solid black;
+  position: fixed;
+  top: 0;
+  margin: 0;
+  z-index: 10;
+}
+
+.scroll-font h1{
+	font-size: 10rem;
+	text-align: center;
+	margin-top: 8rem;
+}
+
+.the_title h1{
+	padding-top: 0.5rem;
+  font-size: 2.3rem;
+  font-weight: normal;
+}
+
+.the_title h1 a{
+	color: black;
+}
+
+header .container{
+    overflow-y: hidden;
+}
+
+.menu {
+  height: 4rem;
+  line-height: 4rem;
+  display: flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+
+.menu li{
+  list-style: none;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.menu ul li a{
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
+  padding-right:1rem;
+  }
+
+.menu ul li a:hover{
+  text-decoration: underline;
+  }
+.menu ul li a:active{
+	text-decoration: underline;
+	}
+
+article{
+	margin-top: 10rem;
+}
+
+.noMargin{
+	margin-top: 4rem;
+}
+
+article .row{
+	margin-top: 5rem;
+}
+
+article h2{
+	font-size: 18vw;
+	padding-bottom: 5vh;
+	font-weight:600;
+}
+
+article h3{
+  font-size: 5rem;
+  font-weight: normal;
+}
+
+article h3 a{
+  color: black;
+  text-decoration: none;
+}
+
+article h3 a:hover{
+  color: black;
+  text-decoration: underline;
+}
+
+.single-title{
+   position: sticky !important;
+	 top: 8rem!important;
+	 height: 50vh;
+}
+
+.meta-data h3{
+	margin-top: 0;
+	margin-bottom: 0;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	position: relative;
+	margin-top: -1px;
+  padding: 0;
+	width: 100%;
+	overflow-y: hidden;
+	color: black;
+}
+
+.animated-info{
+		height: 100%;
+}
+
+.meta-data h3 > .container-fluid:hover{
+	animation: swipeIconUp 1s forwards;
+	animation-timing-function: linear;
+}
+
+@keyframes swipeIconUp{
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-200%); }
+    51% { transform: translateY(200%); }
+    100% { transform: translateY(0); }
+}
+
+.container-fluid a:hover{
+	text-decoration: none;
+}
+
+article h4{
+  font-size: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-style: italic;
+  font-weight: normal;
+  font-family: 'FONT NAME';
+}
+
+article p{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+	font-size: 1.5rem;
+  line-height: 1.8rem;
+}
+
+p a:hover{
+	color: black;
+	text-decoration: underline;
+}
+
+.img-post{
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+	object-fit: contain;
+}
+
+.img-post img{
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.media{
+  width: 100%;
+}
+
+.content{
+  float: left;
+  width: 60%;
+}
+
+.clear{
+  clear: both;
+}
+
+.main-sidebar{
+padding: 10px;
+margin: 15px 0;
+}
+
+.main-sidebar li{
+  list-style: none;
+  line-height: 30px;
+}
+
+.main-sidebar a{
+  text-decoration: none;
+}
+
+footer{
+  font-size: 0.8rem;
+  text-align: right;
+  padding: 1.5rem 0;
+	background-color: #fff;
+	mix-blend-mode: hard-light;
+}
+
+.flag{
+  position: relative;
+  margin: 5em auto;
+}
+
+.flag > div {
+  position: absolute;
+  height: 100%;
+}
+
+.main-home{
+	isolation: isolate;
+}
+
+.scrolling-text{
+  margin: 0;
+  padding: 0;
+  height: 100vw;
+  overflow-x: hidden;
+	font-size: 10em;
+	color: white;
+	-webkit-mix-blend-mode:difference;
+	-moz-mix-blend-mode:difference;
+	-ms-mix-blend-mode:difference;
+	-o-mix-blend-mode:difference;
+	mix-blend-mode:difference;
+	-webkit-text-stroke-width: 1px;
+	-moz-text-stroke-width: 1px;
+	-ms-text-stroke-width: 1px;
+	text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+	-moz-text-stroke-color: black;
+	-ms-text-stroke-color: black;
+	text-stroke-color: black;
+}
+.scrolling-text p1{
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 1.5em;
+	left: 100vw;
+	transform: translateY(-50%);
+}
+.scrolling-text p2{
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 1em;
+	right: 100vw;
+	transform: translateY(50%);
+}
+
+.scrolling-text p3{
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 3.5em;
+	left: 100vw;
+	transform: translateY(-50%);
+}
+
+#wo{
+  margin-top: 15vh;
+}
+
+#wo img{
+	width: 100%;
+}
+
+.wp-block-pdfb-pdf-block{
+	height: 100vh !important;
+  overflow-x:hidden !important;
+	border: solid 1px black;
+	margin-bottom: 8vh;
+}
+
+.article-home{
+	position: relative;
+	border-top: solid 1px black;
+	padding-top: 3rem;
+}
+
+.article-home-2{
+	position: relative;
+}
+
+.article-home-3{
+	position: relative;
+}
+
+.article-home-4{
+	position: relative;
+	border-bottom: solid 1px black;
+	perspective: 200vw;
+	-webkit-perspective: 200vw;
+}
+
+#logo-turn{
+	position: relative;
+  height: 30vw;
+  width: 30vw;
+  left: 50%;
+  margin-left: -15vw;
+  transform-style: preserve-3d;
+  animation: rot 15s linear infinite;
+}
+
+.face{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-image: url(img/logo-gandhara.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+	background-position: center;
+}
+
+@keyframes rot {
+  0%{transform: rotateY(-360deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+@media all and (max-width: 770px) and (min-width: 320px) {
+
+	body .cursor__ball {
+    display: none;
+	}
+
+	.the_title h1{
+		padding-top: 0.8rem;
+	  font-size: 2rem;
+	}
+
+	article h3{
+	  font-size: 3.5rem;
+	}
+
+	article h4{
+	  font-size: 1.6rem;
+	}
+
+	.single-title{
+	   position: static !important;
+		 height: auto;
+	}
+
+	.img-post img{
+	  width: auto;
+	  height: 100%;
+	  top: 0;
+	  transform: translateY(0%);
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.wp-block-pdfb-pdf-block{
+		margin: 8vw;
+	}
+
+	.article-home-4{
+		-webkit-perspective: 500vh;
+	}
+
+	footer{
+	  text-align: center;
+	}
+
+
+}
+
+.center{
+	text-align:center;
+}
+
+

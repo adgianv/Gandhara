@@ -1,0 +1,90 @@
+---
+interface Props {
+  title?: string;
+}
+const { title = "Gandhara" } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <meta charset="UTF-8">
+  <title>{title}</title>
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="cursor">
+    <div class="cursor__ball cursor__ball--big">
+      <svg height="30" width="30">
+        <circle cx="15" cy="15" r="12" stroke-width="0"></circle>
+      </svg>
+    </div>
+    <div class="cursor__ball cursor__ball--small">
+      <svg height="10" width="10">
+        <circle cx="5" cy="5" r="4" stroke-width="0"></circle>
+      </svg>
+    </div>
+  </div>
+
+  <div id="mix"></div>
+
+  <header>
+    <div class="container-fluid">
+      <div class="the_title">
+        <h1><a href="/">Gandhara</a></h1>
+      </div>
+    </div>
+    <nav class="menu">
+      <div class="container-fluid">
+        <ul class="menu">
+          <li><a href="/#mostre">Mostre</a></li>
+          <li><a href="/#cataloghi">Cataloghi</a></li>
+          <li><a href="/#collab">Collab</a></li>
+          <li><a href="/#pharmakon">Pharmakon</a></li>
+          <li><a href="/#stampa">Stampa</a></li>
+          <li><a href="/#about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <slot />
+
+  <footer>
+    <div class="container-fluid">
+      <p>&copy; 2026 - Gandhara</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script>
+    // CURSOR BALL
+    const $bigBall = document.querySelector('.cursor__ball--big');
+    const $smallBall = document.querySelector('.cursor__ball--small');
+    const $hoverables = document.querySelectorAll('.hoverable');
+
+    document.body.addEventListener('mousemove', onMouseMove);
+    for (let i = 0; i < $hoverables.length; i++) {
+      $hoverables[i].addEventListener('mouseenter', onMouseHover);
+      $hoverables[i].addEventListener('mouseleave', onMouseHoverOut);
+    }
+
+    function onMouseMove(e) {
+      TweenMax.to($bigBall, .4, { x: e.pageX - 15, y: e.pageY - 15 });
+      TweenMax.to($smallBall, .1, { x: e.pageX - 5, y: e.pageY - 7 });
+    }
+    function onMouseHover() { TweenMax.to($bigBall, .3, { scale: 4 }); }
+    function onMouseHoverOut() { TweenMax.to($bigBall, .3, { scale: 1 }); }
+
+    jQuery(document).on('scroll', function(){
+      jQuery('p1').css("left", Math.max(100 - 0.2*window.scrollY, 1) + "vw");
+      jQuery('p2').css("right", Math.max(100 - 0.2*window.scrollY, 1) + "vw");
+      jQuery('p3').css("left", Math.max(100 - 0.2*window.scrollY, 1) + "vw");
+    });
+  </script>
+
+</body>
+</html>
